@@ -1,0 +1,198 @@
+{
+  "app": {
+    "title": "SEA-PIRATES",
+    "tagline": "扬帆 · 开炮 · 掠货 · 求生"
+  },
+  "language": {
+    "label": "语言",
+    "system": "跟随系统",
+    "enUS": "English",
+    "zhCN": "简体中文"
+  },
+  "common": {
+    "back": "返回"
+  },
+  "title": {
+    "bestDistance": "最远航程",
+    "bestBounty": "最高赏金",
+    "runs": "航行次数",
+    "gold": "金币",
+    "play": "起锚出发",
+    "help": "航海指南",
+    "log": "船长日志",
+    "market": "漂浮港口",
+    "sound": "音效：开",
+    "soundOn": "音效：开",
+    "soundOff": "音效：关"
+  },
+  "dock": {
+    "title": "选择你的船",
+    "hull": "船体",
+    "speed": "航速",
+    "fire": "舷炮",
+    "start": "扬帆启航",
+    "choose": "驾驶此船",
+    "selected": "已在船上"
+  },
+  "help": {
+    "title": "航海指南",
+    "keyboard": "键盘",
+    "touch": "触屏",
+    "goal": "航程",
+    "goalText": "一路向东，别沉。1,000 米与 3,000 米处海域会变化，每 1,000 米会有利维坦浮出水面。连续击沉可提升连击倍率，赏金越高，整片海就越想让你死。",
+    "up": "随浪上浮",
+    "down": "顺流下沉",
+    "left": "向后回撤",
+    "right": "向前突进",
+    "fire": "按住即开炮",
+    "special": "蓄满后全舷齐射",
+    "pause": "暂停",
+    "drag": "任意位置拖动以操控",
+    "hold": "手指按住即持续开炮",
+    "tapSpecial": "点击圆形按钮发动齐射"
+  },
+  "hud": {
+    "hull": "船体",
+    "bounty": "赏金",
+    "gold": "金币",
+    "wind": "风向",
+    "tailwind": "顺风",
+    "headwind": "逆风",
+    "calm": "无风",
+    "special": "齐射",
+    "wanted": "通缉",
+    "pause": "暂停"
+  },
+  "biome": {
+    "shallows": "晨光浅滩",
+    "pass": "海蛇航道",
+    "abyss": "深渊"
+  },
+  "banner": {
+    "shallows": "晨光浅滩",
+    "pass": "海蛇航道",
+    "abyss": "深渊",
+    "leviathan": "利维坦",
+    "broadside": "全舷齐射！",
+    "siren": "海妖之歌",
+    "tentacle": "触手断裂",
+    "slain": "利维坦已伏诛",
+    "elite": "精英猎手",
+    "w1": "看热闹的",
+    "w2": "绳结海盗",
+    "w3": "海军到了",
+    "w4": "精英猎手",
+    "w5": "整片海都在猎杀你"
+  },
+  "pause": {
+    "title": "暂泊海上",
+    "resume": "继续航行",
+    "market": "漂浮港口",
+    "restart": "重新开始",
+    "quit": "弃船回港"
+  },
+  "report": {
+    "title": "残骸报告",
+    "sub": "大海会留下它夺走的一切",
+    "distance": "航程",
+    "bounty": "赏金",
+    "gold": "打捞金币",
+    "kills": "击沉船只",
+    "combo": "最佳连击",
+    "bosses": "利维坦",
+    "wanted": "通缉",
+    "new": "新纪录",
+    "again": "再次出海",
+    "market": "漂浮港口",
+    "menu": "主菜单",
+    "bestDist": "最远航程",
+    "bestBounty": "最高赏金",
+    "bestCombo": "最佳连击",
+    "totalRuns": "总航行次数",
+    "totalKills": "总击沉数",
+    "bank": "累计金币"
+  },
+  "lost": {
+    "title": "你的船沉了",
+    "sub": "大海会留下它夺走的一切"
+  },
+  "port": {
+    "title": "前方有漂浮港口",
+    "sub": "一艘挂着灯笼的船缓缓靠来，咸味老山姆朝你招手。",
+    "sailon": "继续航行",
+    "dock": "靠港"
+  },
+  "rotate": {
+    "title": "请把设备横过来",
+    "sub": "《海贼》是一款横版舷炮游戏，请旋转设备至横屏。"
+  },
+  "market": {
+    "title": "黑市",
+    "sam": "哟，赛拉斯！这船壳看着可够呛。金币管够——先补补船板吧，别等深渊把你吞了。",
+    "tab": {
+      "repair": "维修",
+      "arms": "军械",
+      "crew": "船员",
+      "ships": "船坞"
+    },
+    "patch": "临时补板",
+    "patchDs": "用新木料把船身上的破洞一块块钉上。",
+    "fullRepair": "全面检修",
+    "fullRepairDs": "倾船刮底、清理海藻、重新填缝。",
+    "plating": "船体装甲",
+    "platingDs": "沿肋材加装铁板，每级增加一点船体值。",
+    "cannon": "火炮",
+    "cannonDs": "更重的炮身、更烈的火药，每发伤害更高。",
+    "cannonLv": "炮甲板",
+    "crewBonus": "护符",
+    "crewBonusDs": "各类护符与奇物，到船员页购买，可与火炮叠加。",
+    "crewHint": "前往船员",
+    "buy": "购买",
+    "owned": "已拥有",
+    "hired": "已上船",
+    "maxed": "已满级",
+    "noNeed": "无需维修",
+    "poor": "金币不够",
+    "bought": "已加入船队",
+    "leave": "返回海上"
+  },
+  "log": {
+    "title": "船长日志",
+    "records": "纪录",
+    "achievements": "成就",
+    "daily": "每日挑战",
+    "dailyDone": "每日挑战完成 +{{n}} 金币",
+    "bestDist": "最远航程",
+    "bestBounty": "最高赏金",
+    "bestCombo": "最佳连击",
+    "runs": "航行次数",
+    "sunk": "击沉船数",
+    "leviathans": "击杀利维坦",
+    "bank": "累计金币"
+  },
+  "ach": {
+    "blood": "初次见血",
+    "bloodDs": "击沉你的第一艘船。",
+    "hundred": "百人斩",
+    "hundredDs": "在所有航行中累计击沉一百艘船。",
+    "rampage": "狂澜",
+    "rampageDs": "在单次航行中达成 x25 连击。",
+    "deep": "深水",
+    "deepDs": "单次航行驶出 3,000 米。",
+    "leviathan": "利维坦猎手",
+    "leviathanDs": "把一头利维坦打回深渊。",
+    "plunder": "掠夺者",
+    "plunderDs": "累计存下 10,000 金币。",
+    "ghoul": "食尸鬼",
+    "ghoulDs": "击沉十艘幽灵船。",
+    "marked": "被通缉",
+    "markedDs": "达到五星通缉等级。"
+  },
+  "daily": {
+    "kills": "今天击沉 {{n}} 艘船",
+    "dist": "单次航行驶出 {{n}} 米",
+    "gold": "今天打捞 {{n}} 金币",
+    "combo": "今天达成 x{{n}} 连击",
+    "runs": "今天出海 {{n}} 次"
+  }
+}
