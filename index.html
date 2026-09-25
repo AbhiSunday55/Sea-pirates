@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#07090E">
+<title>SEA-PIRATES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<script src="https://cdn.eazo.ai/platform-assets/inspector.js" defer></script>
+<script src="./i18n.js" defer></script>
+<script src="./sprites.js" defer></script>
+<script src="./game.js" defer></script>
+<script src="./app.js" defer></script>
+</head>
+<body>
+<div class="app">
+  <div class="stage" id="stage">
+
+    <canvas id="world" width="480" height="270" aria-hidden="true"></canvas>
+    <div class="scan" aria-hidden="true"></div>
+
+    <!-- ============================ HUD ============================ -->
+    <div class="hud" id="hud">
+      <div class="hud-tl">
+        <div class="hullrow">
+          <span class="k" data-i18n="hud.hull">HULL</span>
+          <div class="bar"><i id="hullFill"></i><span class="ticks"></span></div>
+        </div>
+        <div class="hearts" id="hearts"></div>
+      </div>
+
+      <div class="hud-tc">
+        <div class="n dist" id="dist">0</div>
+        <div class="k biome" id="biomeName">SUNRISE SHALLOWS</div>
+      </div>
+
+      <div class="hud-tr">
+        <div class="stat"><span class="k" data-i18n="hud.bounty">BOUNTY</span><span class="n gold" id="bounty">0</span></div>
+        <div class="stat"><span class="k" data-i18n="hud.gold">GOLD</span><span class="n" id="gold">0</span></div>
+      </div>
+
+      <div class="hud-bl">
+        <div class="windbox pnl">
+          <span class="k" data-i18n="hud.wind">WIND</span>
+          <div class="arrows" id="windArrows"></div>
+          <span class="k windlabel" id="windLabel">CALM</span>
+        </div>
+        <div class="specialbox pnl" id="specialBox">
+          <span class="k" data-i18n="hud.special">BROADSIDE</span>
+          <div class="ybar"><i id="specialFill"></i></div>
+        </div>
+      </div>
+
+      <div class="hud-wanted pnl" id="wantedBox">
+        <span class="k" data-i18n="hud.wanted">WANTED</span>
+        <div class="stars" id="wantedStars"></div>
+        <div class="infamy"><i id="infamyFill"></i></div>
+      </div>
+
+      <div class="combo" id="combo"></div>
+      <div class="banner" id="banner"></div>
+
+      <button class="pbtn pausebtn" id="pauseBtn" data-i18n-aria-label="hud.pause" aria-label="Pause">II</button>
+      <button class="pbtn specialbtn" id="specialBtn" data-i18n-aria-label="hud.special" aria-label="Broadside">E</button>
+    </div>
+
+    <!-- ========================== SCREENS ========================== -->
+
+    <!-- TITLE -->
+    <section class="screen on" id="scr-title">
+      <div class="scrim"></div>
+      <div class="pad col center">
+        <div class="logo">
+          <span class="lg-l">SEA</span><span class="lg-dash">-</span><span class="lg-b">PIRATES</span>
+        </div>
+        <div class="tagline" data-i18n="app.tagline">SAIL · FIGHT · LOOT · SURVIVE</div>
+        <div class="rule"></div>
+        <div class="titleGrid">
+          <div class="rec"><span class="k" data-i18n="title.bestDistance">FARTHEST</span><span class="n cyn" id="tBestDist">0 m</span></div>
+          <div class="rec"><span class="k" data-i18n="title.bestBounty">TOP BOUNTY</span><span class="n gold" id="tBestBounty">0</span></div>
+          <div class="rec"><span class="k" data-i18n="title.runs">RUNS</span><span class="n" id="tRuns">0</span></div>
+          <div class="rec"><span class="k" data-i18n="title.gold">DOUBLOONS</span><span class="n gold" id="tGold">0</span></div>
+        </div>
+        <div class="titleBtns">
+          <button class="sbtn gold big" id="btnPlay" data-i18n="title.play">WEIGH ANCHOR</button>
+          <button class="sbtn" id="btnHelp" data-i18n="title.help">HOW TO SAIL</button>
+          <button class="sbtn" id="btnLog" data-i18n="title.log">CAPTAIN'S LOG</button>
+          <button class="sbtn" id="btnMarketTop" data-i18n="title.market">FLOATING PORT</button>
+        </div>
+        <div class="footrow">
+          <label class="langpick">
+            <span class="sr" data-i18n="language.label">Language</span>
+            <select data-i18n-locale-select class="sel">
+              <option value="system" data-i18n="language.system">System default</option>
+              <option value="en-US" data-i18n="language.enUS">English</option>
+              <option value="zh-CN" data-i18n="language.zhCN">简体中文</option>
+            </select>
+          </label>
+          <button class="sbtn sm" id="btnMute" data-i18n="title.sound">SOUND: ON</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCK / ship select -->
+    <section class="screen" id="scr-dock">
+      <div class="scrim"></div>
+      <div class="pad col">
+        <div class="head">
+          <h2 class="ttl" data-i18n="dock.title">SELECT YOUR SHIP</h2>
+          <div class="purse pnl g"><span class="k" data-i18n="hud.gold">GOLD</span><span class="n gold" id="dockGold">0</span></div>
+        </div>
+        <div class="shiprow" id="shipRow"></div>
+        <div class="dockFoot">
+          <button class="sbtn ghost" data-back="scr-title" data-i18n="common.back">BACK</button>
+          <button class="sbtn gold big" id="btnCastOff" data-i18n="dock.start">CAST OFF</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO SAIL -->
+    <section class="screen" id="scr-help">
+      <div class="scrim"></div>
+      <div class="pad col">
+        <div class="head"><h2 class="ttl" data-i18n="help.title">HOW TO SAIL</h2></div>
+        <div class="helpGrid" id="helpGrid"></div>
+        <div class="dockFoot">
+          <button class="sbtn ghost" data-back="scr-title" data-i18n="common.back">BACK</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAUSE -->
+    <section class="screen" id="scr-pause">
+      <div class="scrim"></div>
+      <div class="pad col center">
+        <h2 class="ttl" data-i18n="pause.title">HELD FAST</h2>
+        <div class="menuCol">
+          <button class="sbtn gold big" id="btnResume" data-i18n="pause.resume">RESUME</button>
+          <button class="sbtn" id="btnPortMid" data-i18n="pause.market">FLOATING PORT</button>
+          <button class="sbtn" id="btnRestart" data-i18n="pause.restart">NEW RUN</button>
+          <button class="sbtn red" id="btnAbandon" data-i18n="pause.quit">ABANDON SHIP</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- WRECKAGE REPORT -->
+    <section class="screen" id="scr-report">
+      <div class="scrim r"></div>
+      <div class="pad col">
+        <h2 class="ttl red" data-i18n="report.title">WRECKAGE REPORT</h2>
+        <p class="sub" data-i18n="report.sub">THE SEA KEEPS EVERYTHING IT TAKES</p>
+        <div class="reportGrid" id="reportGrid"></div>
+        <div class="recordBanner" id="recordBanner" data-i18n="report.new">NEW RECORD</div>
+        <div class="dockFoot">
+          <button class="sbtn ghost" data-back="scr-title" data-i18n="report.menu">MAIN MENU</button>
+          <button class="sbtn" id="btnPortEnd" data-i18n="report.market">FLOATING PORT</button>
+          <button class="sbtn gold big" id="btnAgain" data-i18n="report.again">SAIL AGAIN</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOATING PORT / BLACK MARKET -->
+    <section class="screen" id="scr-market">
+      <div class="scrim m"></div>
+      <div class="pad col">
+        <div class="head">
+          <h2 class="ttl gold" data-i18n="market.title">THE BLACK MARKET</h2>
+          <div class="purse pnl g"><span class="k" data-i18n="hud.gold">GOLD</span><span class="n gold" id="mkGold">0</span></div>
+        </div>
+        <div class="samBox">
+          <div class="samp" id="samPortrait"></div>
+          <div>
+            <div class="n samName">SALTY SAM</div>
+            <p class="samLine" id="samLine" data-i18n="market.sam">Ahoy, Silas! That hull looks battered. Got plenty of doubloons — want to patch them planks before the Abyss eats you?</p>
+          </div>
+        </div>
+        <div class="tabs" id="mkTabs"></div>
+        <div class="tabBody" id="mkBody"></div>
+        <div class="dockFoot">
+          <button class="sbtn ghost" id="btnMkBack" data-i18n="market.leave">BACK TO SEA</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPTAIN'S LOG -->
+    <section class="screen" id="scr-log">
+      <div class="scrim"></div>
+      <div class="pad col">
+        <div class="head"><h2 class="ttl" data-i18n="log.title">CAPTAIN'S LOG</h2></div>
+        <div class="logGrid">
+          <div class="logCol">
+            <div class="k sec-k" data-i18n="log.records">RECORDS</div>
+            <div class="recList" id="recList"></div>
+            <div class="k sec-k" data-i18n="log.achievements">ACHIEVEMENTS</div>
+            <div class="achList" id="achList"></div>
+          </div>
+          <div class="logCol">
+            <div class="k sec-k" data-i18n="log.daily">DAILY CHALLENGES</div>
+            <div class="dailyList" id="dailyList"></div>
+          </div>
+        </div>
+        <div class="dockFoot">
+          <button class="sbtn ghost" data-back="scr-title" data-i18n="common.back">BACK</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCK PROMPT (mid-run floating port) -->
+    <section class="screen" id="scr-dockprompt">
+      <div class="scrim"></div>
+      <div class="pad col center">
+        <h2 class="ttl gold" data-i18n="port.title">FLOATING PORT AHEAD</h2>
+        <p class="sub" data-i18n="port.sub">A lantern-lit hull drifts alongside. Salty Sam waves you in.</p>
+        <div class="menuCol row2">
+          <button class="sbtn ghost" id="btnSailOn" data-i18n="port.sailon">SAIL ON</button>
+          <button class="sbtn gold big" id="btnDockNow" data-i18n="port.dock">DOCK</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- game over transition -->
+    <section class="screen" id="scr-lost">
+      <div class="scrim r"></div>
+      <div class="pad col center">
+        <h2 class="ttl red big2" data-i18n="lost.title">YOUR HULL IS LOST</h2>
+        <p class="sub" data-i18n="lost.sub">THE SEA KEEPS EVERYTHING IT TAKES</p>
+      </div>
+    </section>
+
+    <!-- ROTATE (portrait phones) -->
+    <section class="screen" id="scr-rotate">
+      <div class="scrim"></div>
+      <div class="pad col center">
+        <div class="rotIcon">⟳</div>
+        <h2 class="ttl" data-i18n="rotate.title">TURN THE WHEEL SIDEWAYS</h2>
+        <p class="sub" data-i18n="rotate.sub">SEA-PIRATES is a broadside game. Rotate your device to landscape.</p>
+      </div>
+    </section>
+
+    <div class="boot" id="boot"><span class="blink">▌</span></div>
+    <div class="vig" aria-hidden="true"></div>
+  </div>
+</div>
+</body>
+</html>
